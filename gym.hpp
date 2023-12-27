@@ -57,7 +57,7 @@ struct list_anggota {
 
 
 // Layanan Section
-void createListL ayanan(list_layanan L);
+void createListLayanan(list_layanan L);
 
 adr_layanan createElmLayanan(infotype_layanan lay);
 
