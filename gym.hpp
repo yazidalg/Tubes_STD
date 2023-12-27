@@ -9,6 +9,7 @@
 #define gym_hpp
 
 #include <iostream>
+using namespace std;
 
 #define nil NULL
 #define info(P) P->info
@@ -16,49 +17,57 @@
 #define prev(P) P->prev
 #define first(L) (L).first
 #define last(L) (L).last
+#define pointerMember(P) P->pointerMember
+#define nextChild(P) P->nextChild
+#define firstChild(P) P->firstChild
 
-using namespace std;
+// Child Section
 
-// Layanan Section
-struct infotype_layanan {
+typedef struct elmChild *adrChild;
+struct elmChild{
+    adrMember pointerMember;
+    adrChild nextChild;
+};
+
+// Facility Section
+struct infotypeFacility {
     string name;
-    string instruktur;
+    string instructor;
+    int membersCount;
 };
 
-typedef struct gym_layanan *adr_layanan;
+typedef struct elmFacility *adrFacility;
 
-struct gym_layanan {
-    infotype_layanan info;
-    adr_layanan next;
-    adr_layanan prev;
+struct elmFacility {
+    infotypeFacility info;
+    adrFacility next;
+    adrChild firstChild;
 };
 
-struct list_layanan {
-    adr_layanan first;
-    adr_layanan last;
+struct listFacility {
+    adrFacility first;
 };
 
-// Anggota Section
-struct infotype_anggota {
+// Members Section
+struct infotypeMember {
     string name;
-    string phone;
+    string phoneNumber;
+    int age;
 };
 
-typedef struct gym_anggota *adr_anggota;
+typedef struct elmMember *adrMember;
 
-struct gym_anggota {
-    infotype_anggota info;
-    adr_anggota next;
+struct elmMember {
+    infotypeMember info;
+    adrMember next;
+    adrMember prev;
 };
 
-struct list_anggota {
-    adr_anggota first;
+struct listMember {
+    adrMember first;
+    adrMember last;
 };
 
-
-// Layanan Section
-void createListLayanan(list_layanan L);
-
-adr_layanan createElmLayanan(infotype_layanan lay);
+// Functionality
 
 #endif /* gym_hpp */
