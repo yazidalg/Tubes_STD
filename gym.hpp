@@ -13,20 +13,24 @@ using namespace std;
 
 #define nil NULL
 #define info(P) P->info
-#define next(P) P->next
-#define prev(P) P->prev
+#define nextFac(P) P->nextFac
+#define nextMem(P) P->nextMem
+#define prevMem(P) P->prevMem
 #define first(L) (L).first
 #define last(L) (L).last
 #define pointerMember(P) P->pointerMember
-#define nextChild(P) P->nextChild
-#define firstChild(P) P->firstChild
+#define nextRel(P) P->nextRel
+#define firstRelation(P) P->firstRelation
 
-// Child Section
+//Address init
+typedef struct elmRelation *adrRelation;
+typedef struct elmFacility *adrFacility;
+typedef struct elmMember *adrMember;
 
-typedef struct elmChild *adrChild;
-struct elmChild{
+// Relation Section
+struct elmRelation{
     adrMember pointerMember;
-    adrChild nextChild;
+    adrRelation nextRel;
 };
 
 // Facility Section
@@ -36,12 +40,10 @@ struct infotypeFacility {
     int membersCount;
 };
 
-typedef struct elmFacility *adrFacility;
-
 struct elmFacility {
     infotypeFacility info;
-    adrFacility next;
-    adrChild firstChild;
+    adrFacility nextFac;
+    adrRelation firstRelation;
 };
 
 struct listFacility {
@@ -55,12 +57,10 @@ struct infotypeMember {
     int age;
 };
 
-typedef struct elmMember *adrMember;
-
 struct elmMember {
     infotypeMember info;
-    adrMember next;
-    adrMember prev;
+    adrMember nextMem;
+    adrMember prevMem;
 };
 
 struct listMember {
@@ -69,5 +69,12 @@ struct listMember {
 };
 
 // Functionality
+void initList(listFacility &LF, listMember &LM); //initialize parent and child list
+adrFacility createElmFacility(infotypeFacility x); //new elmFacility
+adrMember createElmMember(infotypeMember x); //new elmMember
+adrRelation createElmRelation(); //new elmRelation
+
+int menu(); //Menu displayed to user everytime
+int menu1(listFacility &LF, listMember &LM); //Menu displayed to user everytime user choose the first menu 
 
 #endif /* gym_hpp */

@@ -7,7 +7,7 @@
 #include "gym.hpp"
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Tes\n";
+    int inputUser = menu();
+    std::cout << inputUser;
     return 0;
 }
