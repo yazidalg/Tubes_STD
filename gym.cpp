@@ -61,7 +61,14 @@ void facilityMenu(listFacility &LF, listMember &LM) {
             showAllFacilityData(LF, LM);
         } else if (inputUser == 3) {
             cout << "hapus aja lah" << endl;
+        }else{
+            invalidMenu(inputUser);
         }
+        cout << "----- Menu Fasilitas -----" << endl;
+        cout << "1. Tambah Fasilitas" << endl;
+        cout << "2. Lihat Fasilitas" << endl;
+        cout << "3. Hapus Fasilitas" << endl;
+        cout << "0. Kembali" << endl;
         cin >> inputUser;
     }
 }
@@ -79,17 +86,13 @@ void addFacility(listFacility &LF, listMember &LM){
     cout << "2. Tambah Fasilitas Belakang" << endl;
     cout << "0. Kembali" << endl;
     cin >> inputUser;
-    while (inputUser != 0) {
-        if (inputUser == 1) {
-            insertFacilityFirst(LF, createElmFacility(fasilitas));
-            facilityMenu(LF, LM);
-        } else if (inputUser == 2) {
-            insertFacilityLast(LF, createElmFacility(fasilitas));
-            facilityMenu(LF, LM);
-        } else {
-            invalidMenu(inputUser);
-            cin >> inputUser;
-        }
+    if (inputUser == 1) {
+        insertFacilityFirst(LF, createElmFacility(fasilitas));
+    } else if (inputUser == 2) {
+        insertFacilityLast(LF, createElmFacility(fasilitas));
+    } else {
+        invalidMenu(inputUser);
+        cin >> inputUser;
     }
 }
 
@@ -201,10 +204,8 @@ void showAllFacilityData(listFacility LF, listMember LM) {
             cout << endl;
             cout << "Nama : " << info(adr).name << endl;
             cout << "Instruktur : " << info(adr).instructor << endl;
-            cout << "Fasilitas Digunakan : " << info(adr).membersCount << endl;
             adr = nextFac(adr);
         }
     }
-    facilityMenu(LF, LM);
     cout << endl;
 } 
