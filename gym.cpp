@@ -7,7 +7,6 @@
 
 #include "gym.hpp"
 
-
 int mainMenu(){
     int inputUser;
     cout << "----- Gym Ciganitry -----" << endl;
@@ -121,6 +120,22 @@ void showAllMemberData(listMember LM) {
     while (adr != nil) {
         cout << endl;
         cout << "Nama : " << info(adr).name << endl;
+        cout << "Nomor Telepon : " << info(adr).phoneNumber << endl;
+        cout << "Umur : " << info(adr).age << endl;
         adr = nextMem(adr);
     }
+    memberMenu(LM);
+    cout << endl;
+}
+
+adrMember searchMember(listMember LM, string name) {
+    adrMember found = first(LM);
+    adrMember adr = first(LM);
+    while (adr != nil) {
+        if (info(adr).name == name) {
+            found = adr;
+        }
+        adr = next(adr);
+    }
+    return found;
 }

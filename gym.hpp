@@ -106,4 +106,7 @@ void insertMember(listMember &LM, adrMember adr);
 // Show All Data Member
 void showAllMemberData(listMember LM);
 
+// Search Member
+adrMember searchMember(listMember LM, string name);
+
 #endif /* gym_hpp */
