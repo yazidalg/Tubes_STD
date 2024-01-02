@@ -68,13 +68,39 @@ struct listMember {
     adrMember last;
 };
 
-// Functionality
-void initList(listFacility &LF, listMember &LM); //initialize parent and child list
-adrFacility createElmFacility(infotypeFacility x); //new elmFacility
-adrMember createElmMember(infotypeMember x); //new elmMember
-adrRelation createElmRelation(); //new elmRelation
+/* Functioanlity */
 
-int menu(); //Menu displayed to user everytime
-int menu1(listFacility &LF, listMember &LM); //Menu displayed to user everytime user choose the first menu 
+// Initialize parent and child list
+void initList(listFacility &LF, listMember &LM);
+
+//new elmFacility
+adrFacility createElmFacility(infotypeFacility x);
+
+// New elmMember
+adrMember createElmMember(infotypeMember x);
+
+// New elmRelation
+adrRelation createElmRelation();
+
+// Menu displayed to user everytime
+int mainMenu();
+
+// Menu displayed everytime user choose facility data
+int facilityMenu();
+
+// Menu displayed everytime user choose member data
+int memberMenu();
+
+// Invalid Menu
+int invalidMenu(int invalid);
+
+// Add Member
+void addMember(listMember LM);
+
+// Create List Member
+void createListMember(listMember &LM);
+
+// Insert Member
+void insertMember(listMember &LM, adrMember adr);
 
 #endif /* gym_hpp */

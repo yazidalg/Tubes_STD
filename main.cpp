@@ -10,15 +10,20 @@ int main(int argc, const char * argv[]) {
     listFacility LF;
     listMember LM;
     initList(LF, LM);
-    int inputUser = menu();
-    while (inputUser != 0){
-        if (inputUser == 1){
-            menu1(LF,LM);
-        }else if (inputUser == 2){
-            
+    int inputUser = mainMenu();
+    while (inputUser != 0) {
+        if (inputUser == 1) {
+            inputUser = facilityMenu();
+            cout << "Anda memilih " << inputUser << endl;
+        } else if (inputUser == 2) {
+            inputUser = memberMenu();
+            cout << "Anda memilih " << inputUser << endl;
+        } else {
+            invalidMenu(inputUser);
         }
-        menu();
+        mainMenu();
+        cin >> inputUser;
     }
-    std::cout << inputUser;
+    cout << "Keluar dari program" << endl;
     return 0;
 }
