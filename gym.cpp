@@ -46,7 +46,7 @@ adrRelation createElmRelation(){
     return P;
 }
 
-void facilityMenu(listFacility LF, listMember LM) {
+void facilityMenu(listFacility &LF, listMember &LM) {
     int inputUser;
     cout << "----- Menu Fasilitas -----" << endl;
     cout << "1. Tambah Fasilitas" << endl;
@@ -66,14 +66,35 @@ void facilityMenu(listFacility LF, listMember LM) {
     }
 }
 
-void addFacility(listFacility LF){
+void addFacility(listFacility &LF){
     int inputUser;
-    cout << "----- Menu Fasilitas -----" << endl;
-    cout << "1. Tambah Fasilitas" << endl;
-    cout << "2. Lihat Fasilitas" << endl;
-    cout << "3. Hapus Fasilitas" << endl;
+    cout << "----- Tambah Fasilitas -----" << endl;
+    infotypeFacility fasilitas;
+    cout << "Nama Fasilitas/Layanan : ";
+    cin >> fasilitas.name;
+    cout << "Nama Instruktur : ";
+    cin >> fasilitas.instructor;
+    fasilitas.membersCount = 0;
+    cout << "1. Tambah Fasilitas Depan" << endl;
+    cout << "2. Tambah Fasilitas Belakang" << endl;
     cout << "0. Kembali" << endl;
     cin >> inputUser;
+    while (inputUser != 0){
+        if (inputUser == 1){
+            insertFacilityFirst(LF, createElmFacility(fasilitas));
+        }else if (inputUser == 2){
+            insertFacilityLast(LF, createElmFacility(fasilitas));
+        }else{
+            invalidMenu(inputUser);
+            cin >> inputUser;
+        }
+    }
+}
+
+void insertFacilityFirst(listFacility &LF, adrFacility adr) {
+    if (first(LF) == nil) {
+        first(LF) = nil;
+    }
 }
 
 void memberMenu(listMember LM) {
@@ -149,10 +170,14 @@ adrMember searchMember(listMember LM, string name) {
     return found;
 }
 
-void showAllFacilityData(listFacility LF) {
+void showAllFacilityData(listFacility LF, listMember LM) {
     adrFacility adr = first(LF);
     while (adr != nil) {
         cout << endl;
+        cout << "Nama : " << info(adr).name << endl;
+        cout << "Instruktur : " << info(adr).instructor << endl;
+        cout << "Fasilitas Digunakan : " << info(adr).membersCount << endl;
+        adr = next(adr);
     }
-    
+    facilityMenu(LF, LM);
 } 

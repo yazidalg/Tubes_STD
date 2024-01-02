@@ -86,16 +86,16 @@ adrRelation createElmRelation();
 int mainMenu();
 
 // Menu displayed everytime user choose facility data
-void facilityMenu(listFacility &LF, listMember LM);
+void facilityMenu(listFacility &LF, listMember &LM);
 
 // Add Facility With Input First Index
 void addFacility(listFacility &LF);
 
 // Insert First Index Facility Logic Only
-void insertFacilityFirst(listFacility LF, adrFacility adr);
+void insertFacilityFirst(listFacility &LF, adrFacility adr);
 
 // Insert Last Index Facility Logic Only
-void insertFacilityLast(listFacility LF, adrFacility adr);
+void insertFacilityLast(listFacility &LF, adrFacility adr);
 
 // Menu displayed everytime user choose member data
 void memberMenu(listMember LM);
@@ -113,7 +113,7 @@ void insertMember(listMember &LM, adrMember adr);
 void showAllMemberData(listMember LM);
 
 // Show All Data Facility
-void showAllFacilityData(listFacility LF);
+void showAllFacilityData(listFacility LF, listMember LM);
 
 // Search Member
 adrMember searchMember(listMember LM, string name);
