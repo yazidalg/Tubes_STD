@@ -7,6 +7,7 @@
 
 #include "gym.hpp"
 
+
 int mainMenu(){
     int inputUser;
     cout << "----- Gym Ciganitry -----" << endl;
@@ -15,6 +16,11 @@ int mainMenu(){
     cout << "0. Keluar" << endl;
     cin >> inputUser;
     return inputUser;
+}
+
+void createListMember(listMember &LM) {
+    first(LM) = nil;
+    last(LM) = nil;
 }
 
 void initList(listFacility &LF, listMember &LM){
@@ -57,7 +63,7 @@ int facilityMenu() {
     return inputUser;
 }
 
-int memberMenu() {
+int memberMenu(listMember LM) {
     int inputUser;
     cout << "----- Menu Member -----" << endl;
     cout << "1. Tambah Member" << endl;
@@ -65,6 +71,16 @@ int memberMenu() {
     cout << "3. Hapus Member" << endl;
     cout << "0. Kembali" << endl;
     cin >> inputUser;
+    while (inputUser != 0) {
+        if (inputUser == 1) {
+            addMember(LM);
+        } else if (inputUser == 2) {
+            showAllMemberData(LM);
+        } else if (inputUser == 3) {
+            cout << "hapus aja lah" << endl;
+        }
+        cin >> inputUser;
+    }
     return inputUser;
 }
 
@@ -86,6 +102,7 @@ void addMember(listMember LM) {
         createListMember(LM);
     }
     insertMember(LM, createElmMember(member));
+    memberMenu(LM);
 }
 
 void insertMember(listMember &LM, adrMember adr) {
@@ -104,5 +121,6 @@ void showAllMemberData(listMember LM) {
     while (adr != nil) {
         cout << endl;
         cout << "Nama : " << info(adr).name << endl;
+        adr = nextMem(adr);
     }
 }

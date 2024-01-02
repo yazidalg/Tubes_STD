@@ -89,7 +89,7 @@ int mainMenu();
 int facilityMenu();
 
 // Menu displayed everytime user choose member data
-int memberMenu();
+int memberMenu(listMember LM);
 
 // Invalid Menu
 int invalidMenu(int invalid);
@@ -102,5 +102,8 @@ void createListMember(listMember &LM);
 
 // Insert Member
 void insertMember(listMember &LM, adrMember adr);
+
+// Show All Data Member
+void showAllMemberData(listMember LM);
 
 #endif /* gym_hpp */

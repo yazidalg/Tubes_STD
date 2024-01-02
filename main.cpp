@@ -16,7 +16,7 @@ int main(int argc, const char * argv[]) {
             inputUser = facilityMenu();
             cout << "Anda memilih " << inputUser << endl;
         } else if (inputUser == 2) {
-            inputUser = memberMenu();
+            inputUser = memberMenu(LM);
             cout << "Anda memilih " << inputUser << endl;
         } else {
             invalidMenu(inputUser);
