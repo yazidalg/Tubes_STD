@@ -56,9 +56,9 @@ void facilityMenu(listFacility &LF, listMember &LM) {
     cin >> inputUser;
     while (inputUser != 0) {
         if (inputUser == 1) {
-            addFacility(LF);
+            addFacility(LF, LM);
         } else if (inputUser == 2) {
-            cout << "hapus aja lah" << endl;
+            showAllFacilityData(LF, LM);
         } else if (inputUser == 3) {
             cout << "hapus aja lah" << endl;
         }
@@ -66,7 +66,7 @@ void facilityMenu(listFacility &LF, listMember &LM) {
     }
 }
 
-void addFacility(listFacility &LF){
+void addFacility(listFacility &LF, listMember &LM){
     int inputUser;
     cout << "----- Tambah Fasilitas -----" << endl;
     infotypeFacility fasilitas;
@@ -79,12 +79,14 @@ void addFacility(listFacility &LF){
     cout << "2. Tambah Fasilitas Belakang" << endl;
     cout << "0. Kembali" << endl;
     cin >> inputUser;
-    while (inputUser != 0){
-        if (inputUser == 1){
+    while (inputUser != 0) {
+        if (inputUser == 1) {
             insertFacilityFirst(LF, createElmFacility(fasilitas));
-        }else if (inputUser == 2){
+            facilityMenu(LF, LM);
+        } else if (inputUser == 2) {
             insertFacilityLast(LF, createElmFacility(fasilitas));
-        }else{
+            facilityMenu(LF, LM);
+        } else {
             invalidMenu(inputUser);
             cin >> inputUser;
         }
@@ -93,7 +95,23 @@ void addFacility(listFacility &LF){
 
 void insertFacilityFirst(listFacility &LF, adrFacility adr) {
     if (first(LF) == nil) {
-        first(LF) = nil;
+        first(LF) = adr;
+    } else {
+        nextFac(adr) = first(LF);
+        first(LF) = adr;  
+    }
+}
+
+void insertFacilityLast(listFacility &LF, adrFacility adr) {
+    adrFacility q;
+    q = first(LF);
+    if (first(LF) == nil) {
+        first(LF) = adr;
+    } else {
+        while (nextFac(q) != nil) {
+            q = nextFac(q);
+        }
+        nextFac(q) = adr;
     }
 }
 
@@ -147,12 +165,16 @@ void insertMember(listMember &LM, adrMember adr) {
 
 void showAllMemberData(listMember LM) {
     adrMember adr = first(LM);
-    while (adr != nil) {
-        cout << endl;
-        cout << "Nama : " << info(adr).name << endl;
-        cout << "Nomor Telepon : " << info(adr).phoneNumber << endl;
-        cout << "Umur : " << info(adr).age << endl;
-        adr = nextMem(adr);
+    if (first(LM) == nil) {
+        cout << "List Masih Kosong" << endl;
+    } else {
+        while (adr != nil) {
+            cout << endl;
+            cout << "Nama : " << info(adr).name << endl;
+            cout << "Nomor Telepon : " << info(adr).phoneNumber << endl;
+            cout << "Umur : " << info(adr).age << endl;
+            adr = nextMem(adr);
+        }
     }
     memberMenu(LM);
     cout << endl;
@@ -172,12 +194,17 @@ adrMember searchMember(listMember LM, string name) {
 
 void showAllFacilityData(listFacility LF, listMember LM) {
     adrFacility adr = first(LF);
-    while (adr != nil) {
-        cout << endl;
-        cout << "Nama : " << info(adr).name << endl;
-        cout << "Instruktur : " << info(adr).instructor << endl;
-        cout << "Fasilitas Digunakan : " << info(adr).membersCount << endl;
-        adr = next(adr);
+    if (first(LF) == nil) {
+        cout << "List Masih Kosong" << endl;
+    } else {
+        while (adr != nil) {
+            cout << endl;
+            cout << "Nama : " << info(adr).name << endl;
+            cout << "Instruktur : " << info(adr).instructor << endl;
+            cout << "Fasilitas Digunakan : " << info(adr).membersCount << endl;
+            adr = nextFac(adr);
+        }
     }
     facilityMenu(LF, LM);
+    cout << endl;
 } 

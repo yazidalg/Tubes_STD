@@ -89,7 +89,7 @@ int mainMenu();
 void facilityMenu(listFacility &LF, listMember &LM);
 
 // Add Facility With Input First Index
-void addFacility(listFacility &LF);
+void addFacility(listFacility &LF, listMember &LM);
 
 // Insert First Index Facility Logic Only
 void insertFacilityFirst(listFacility &LF, adrFacility adr);
