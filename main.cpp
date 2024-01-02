@@ -13,16 +13,13 @@ int main(int argc, const char * argv[]) {
     int inputUser = mainMenu();
     while (inputUser != 0) {
         if (inputUser == 1) {
-            inputUser = facilityMenu();
-            cout << "Anda memilih " << inputUser << endl;
+            facilityMenu(LF,LM);
         } else if (inputUser == 2) {
-            inputUser = memberMenu(LM);
-            cout << "Anda memilih " << inputUser << endl;
+            memberMenu(LM);
         } else {
             invalidMenu(inputUser);
         }
-        mainMenu();
-        cin >> inputUser;
+        inputUser = mainMenu();
     }
     cout << "Keluar dari program" << endl;
     return 0;

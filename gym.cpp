@@ -17,11 +17,6 @@ int mainMenu(){
     return inputUser;
 }
 
-void createListMember(listMember &LM) {
-    first(LM) = nil;
-    last(LM) = nil;
-}
-
 void initList(listFacility &LF, listMember &LM){
     first(LF) = NULL;
     first(LM) = NULL;
@@ -51,7 +46,7 @@ adrRelation createElmRelation(){
     return P;
 }
 
-int facilityMenu() {
+void facilityMenu(listFacility LF, listMember LM) {
     int inputUser;
     cout << "----- Menu Fasilitas -----" << endl;
     cout << "1. Tambah Fasilitas" << endl;
@@ -59,10 +54,29 @@ int facilityMenu() {
     cout << "3. Hapus Fasilitas" << endl;
     cout << "0. Kembali" << endl;
     cin >> inputUser;
-    return inputUser;
+    while (inputUser != 0) {
+        if (inputUser == 1) {
+            addFacility(LF);
+        } else if (inputUser == 2) {
+            cout << "hapus aja lah" << endl;
+        } else if (inputUser == 3) {
+            cout << "hapus aja lah" << endl;
+        }
+        cin >> inputUser;
+    }
 }
 
-int memberMenu(listMember LM) {
+void addFacility(listFacility LF){
+    int inputUser;
+    cout << "----- Menu Fasilitas -----" << endl;
+    cout << "1. Tambah Fasilitas" << endl;
+    cout << "2. Lihat Fasilitas" << endl;
+    cout << "3. Hapus Fasilitas" << endl;
+    cout << "0. Kembali" << endl;
+    cin >> inputUser;
+}
+
+void memberMenu(listMember LM) {
     int inputUser;
     cout << "----- Menu Member -----" << endl;
     cout << "1. Tambah Member" << endl;
@@ -80,13 +94,11 @@ int memberMenu(listMember LM) {
         }
         cin >> inputUser;
     }
-    return inputUser;
 }
 
-int invalidMenu(int invalid) {
+void invalidMenu(int invalid) {
     cout << endl;
     cout << "Menu dengan pilihan " << invalid << " tidak tersedia" << endl;
-    return invalid;
 }
 
 void addMember(listMember LM) {
@@ -97,9 +109,6 @@ void addMember(listMember LM) {
     cin >> member.phoneNumber;
     cout << "Umur : ";
     cin >> member.age;
-    if (first(LM) == nil) {
-        createListMember(LM);
-    }
     insertMember(LM, createElmMember(member));
     memberMenu(LM);
 }
@@ -139,3 +148,11 @@ adrMember searchMember(listMember LM, string name) {
     }
     return found;
 }
+
+void showAllFacilityData(listFacility LF) {
+    adrFacility adr = first(LF);
+    while (adr != nil) {
+        cout << endl;
+    }
+    
+} 
