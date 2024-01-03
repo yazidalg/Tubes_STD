@@ -116,6 +116,10 @@ adrFacility searchFacility(listFacility LF, string name);
 // Delete Facility with the relation included
 adrFacility deleteFacility(listFacility &LF, string name);
 
+// Show All Data Parent And Child
+void showAllData(listFacility LF, listMember LM);
+
+void subListRelation(adrRelation relation);
 /* -----Member----- */
 
 // Menu displayed everytime user choose member data

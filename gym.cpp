@@ -342,8 +342,10 @@ adrMember deleteMember(listFacility &LF, listMember &LM, string name) {
                     nextRel(Q) = nextRel(srcRel);
                     nextRel(srcRel) = nil;
                 }
+                info(srcFac).membersCount--;
             }
             srcFac = nextFac(srcFac);
+
         }
     }
     return adrDel;
@@ -410,4 +412,34 @@ void chooseFacility(listFacility &LF, listMember &LM){
         fasilitasTerpilih = searchFacility(LF, name);
     }
     connectFacility(LF, LM, fasilitasTerpilih, memberMemilih);
+    info(fasilitasTerpilih).membersCount++;
+}
+
+void showAllData(listFacility LF, listMember LM) {
+    adrFacility facilityAdr = first(LF);
+
+    if (facilityAdr == nil) {
+        cout << "Kosong" << endl;
+    } else {
+        while (facilityAdr != nil) {
+            cout << "Nama : " << info(facilityAdr).name << endl;
+            cout << "Instruktur : " << info(facilityAdr).instructor << endl;
+            if (firstRelation(facilityAdr) == nil) {
+                cout << "Fasilitas ini belum digunakan siapa pun" << endl;
+            } else {
+                cout << "Pengguna Fasilitas : " << endl;
+                cout << "Fasilitas digunakan sebanyak : " << info(facilityAdr).membersCount << endl;
+                subListRelation(firstRelation(facilityAdr));
+            }
+            facilityAdr = nextFac(facilityAdr);
+        }
+    }
+}
+
+void subListRelation(adrRelation relation) {
+    while (relation != nil) {
+        cout << "Nama : " << info(pointerMember(relation)).name << endl;
+        cout << "Umur : " << info(pointerMember(relation)).age << endl;
+        relation = nextRel(relation);
+    }
 }

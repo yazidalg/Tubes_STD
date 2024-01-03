@@ -17,7 +17,7 @@ int main(int argc, const char * argv[]) {
         } else if (inputUser == 2) {
             memberMenu(LF, LM);
         } else if (inputUser == 3) {
-            // showAllData(LF, LM);
+            showAllData(LF, LM);
         } else {
             invalidMenu(inputUser);
         }
