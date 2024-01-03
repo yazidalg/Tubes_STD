@@ -1,9 +1,10 @@
 # Data Structures
-This is our final project for data structures subject
+This is our final project for data structures subject with gym membership data theme.
 
 # Disclaimer
 If you cannot run this project on your computer.
 You can follow the ```tasks.json``` file.
+Or maybe you should install the c++ language to run this.
 
 ```javascript
 {
