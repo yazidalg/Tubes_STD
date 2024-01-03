@@ -15,7 +15,7 @@ int main(int argc, const char * argv[]) {
         if (inputUser == 1) {
             facilityMenu(LF,LM);
         } else if (inputUser == 2) {
-            memberMenu(LM);
+            memberMenu(LF, LM);
         } else {
             invalidMenu(inputUser);
         }

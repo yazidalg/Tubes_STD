@@ -68,25 +68,29 @@ struct listMember {
     adrMember last;
 };
 
-/* Functioanlity */
+/* Functionality */
+
+/* -----General----- */
 
 // Initialize parent and child list
 void initList(listFacility &LF, listMember &LM);
 
-//new elmFacility
-adrFacility createElmFacility(infotypeFacility x);
+// Menu displayed to user everytime
+int mainMenu();
 
-// New elmMember
-adrMember createElmMember(infotypeMember x);
+// Invalid Menu
+void invalidMenu(int invalid);
 
 // New elmRelation
 adrRelation createElmRelation();
 
-// Menu displayed to user everytime
-int mainMenu();
+/* -----Facility----- */
 
 // Menu displayed everytime user choose facility data
 void facilityMenu(listFacility &LF, listMember &LM);
+
+//new elmFacility
+adrFacility createElmFacility(infotypeFacility x);
 
 // Add Facility With Input First Index
 void addFacility(listFacility &LF, listMember &LM);
@@ -97,11 +101,25 @@ void insertFacilityFirst(listFacility &LF, adrFacility adr);
 // Insert Last Index Facility Logic Only
 void insertFacilityLast(listFacility &LF, adrFacility adr);
 
-// Menu displayed everytime user choose member data
-void memberMenu(listMember LM);
+// Centralize Of Function Search Facility And DeleteFacility
+void deleteFacilityByname(listFacility &LF);
 
-// Invalid Menu
-void invalidMenu(int invalid);
+// Show All Data Facility
+void showAllFacilityData(listFacility LF, listMember LM);
+
+// Search Facility By Name
+adrFacility searchFacility(listFacility LF, string name);
+
+// Delete Facility with the relation included
+adrFacility deleteFacility(listFacility &LF, string name);
+
+/* -----Member----- */
+
+// Menu displayed everytime user choose member data
+void memberMenu(listFacility &LF, listMember &LM);
+
+// New elmMember
+adrMember createElmMember(infotypeMember x);
 
 // Add Member
 void addMember(listMember &LM);
@@ -112,22 +130,19 @@ void insertMemberFirst(listMember &LM, adrMember adr);
 // Insert Last Index Member Logic Only
 void insertMemberLast(listMember &LM, adrMember adr);
 
-// Centralize Of Function Search Facility And DeleteFacility
-void deleteFacilityByname(listFacility &LF);
-
 // Show All Data Member
 void showAllMemberData(listMember LM);
-
-// Show All Data Facility
-void showAllFacilityData(listFacility LF, listMember LM);
 
 // Search Member
 adrMember searchMember(listMember LM, string name);
 
-// Search Facility By Name
-adrFacility searchFacility(listFacility LF, string name);
+// Delete Member
+adrMember deleteMember(listFacility &LF, listMember &LM, string name);
 
-// Delete Facility with the relation included
-adrFacility deleteFacility(listFacility &LF, string name);
+// Connect Facility to Member
+void connectFacility(listFacility &LF, listMember &LM, adrMember adrMem);
+
+// Centralize Of Function Search Facility And DeleteFacility
+void deleteMemberByname(listFacility &LF, listMember &LM);
 
 #endif /* gym_hpp */
