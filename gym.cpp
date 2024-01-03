@@ -215,6 +215,7 @@ void memberMenu(listFacility &LF, listMember &LM) {
         cout << "1. Tambah Member" << endl;
         cout << "2. Lihat Member" << endl;
         cout << "3. Hapus Member" << endl;
+        cout << "4. Pilih Fasilitas" << endl;
         cout << "0. Kembali" << endl;
         cin >> inputUser;
     }
@@ -319,18 +320,8 @@ adrMember deleteMember(listFacility &LF, listMember &LM, string name) {
         // Search if the member have a relation/connection associated
         adrFacility srcFac = first(LF);
         adrRelation srcRel;
-        bool found = false;
         while (srcFac != nil) {
-            while (srcFac != nil && !found) {
-                srcRel = firstRelation(srcFac);
-                while (srcRel !=nil && !found) {
-                    if (adrDel == pointerMember(srcRel)){
-                        found = true;
-                    }
-                    srcRel = next(srcRel);
-                }
-                srcFac = nextFac(srcFac);
-            }
+            searchRelation(LF, LM, srcFac, adrDel, srcRel);
             if (srcRel != nil){
                 pointerMember(srcRel) = nil;
                 if (srcRel == firstRelation(srcFac)){
@@ -351,6 +342,7 @@ adrMember deleteMember(listFacility &LF, listMember &LM, string name) {
                     nextRel(srcRel) = nil;
                 }
             }
+            srcFac = nextFac(srcFac);
         }
     }
     return adrDel;
@@ -363,5 +355,37 @@ void deleteMemberByname(listFacility &LF, listMember &LM){
     adrMember adrDel = deleteMember(LF, LM, name);
     if (adrDel != nil){
         cout << "Member dengan nama " << info(adrDel).name << " dihapus" << endl;
+    }
+}
+
+void searchRelation(listFacility LF, listMember LM, adrFacility &srcFac, adrMember adrDel, adrRelation &srcRel){
+    bool found = false;
+    while (srcFac != nil && !found) {
+        srcRel = firstRelation(srcFac);
+        while (srcRel !=nil && !found) {
+            if (adrDel == pointerMember(srcRel)){
+                found = true;
+            } else {
+                srcRel = next(srcRel);
+            }
+        }
+        if (!found){
+            srcFac = nextFac(srcFac);
+        }
+    }
+}
+
+void connectFacility(listFacility &LF, listMember &LM, adrFacility adrFac, adrMember adrMem){
+    adrRelation newRel = createElmRelation();
+    pointerMember(newRel) = adrMem;
+    nextRel(newRel) = nil;
+    if (firstRelation(adrFac) == nil){
+        firstRelation(adrFac) = newRel;
+    }else{
+        adrRelation Q = firstRelation(adrFac);
+        while (nextRel(Q) != nil){
+            Q = nextRel(Q);
+        }
+        nextRel(Q) = newRel;
     }
 }

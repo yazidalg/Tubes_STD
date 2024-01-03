@@ -84,6 +84,9 @@ void invalidMenu(int invalid);
 // New elmRelation
 adrRelation createElmRelation();
 
+// Search Facility By Name
+void searchRelation(listFacility LF, listMember LM, adrFacility &srcFac, adrMember adrDel, adrRelation &srcRel);
+
 /* -----Facility----- */
 
 // Menu displayed everytime user choose facility data
