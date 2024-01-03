@@ -9,11 +9,14 @@
 
 int mainMenu(){
     int inputUser;
-    cout << "----- Gym Ciganitry -----" << endl;
+
+    spacyMotorHonda("Gym Ciganitri");
+
     cout << "1. Data Fasilitas" << endl;
     cout << "2. Data Member" << endl;
     cout << "3. Lihat Fasilitas Beserta Member" << endl;
     cout << "0. Keluar" << endl;
+    cout << "Masukan kode menu : ";
     cin >> inputUser;
     return inputUser;
 }
@@ -53,12 +56,16 @@ adrRelation createElmRelation() {
 
 void facilityMenu(listFacility &LF, listMember &LM) {
     int inputUser;
-    cout << "----- Menu Fasilitas -----" << endl;
+
+    spacyMotorHonda("Menu Member");
+
     cout << "1. Tambah Fasilitas" << endl;
     cout << "2. Lihat Fasilitas" << endl;
     cout << "3. Hapus Fasilitas" << endl;
     cout << "0. Kembali" << endl;
+    cout << "Masukan kode menu : ";
     cin >> inputUser;
+
     while (inputUser != 0) {
         if (inputUser == 1) {
             addFacility(LF, LM);
@@ -69,19 +76,23 @@ void facilityMenu(listFacility &LF, listMember &LM) {
         } else {
             invalidMenu(inputUser);
         }
-        cout << "----- Menu Fasilitas -----" << endl;
+
+        spacyMotorHonda("Menu Member");
         cout << "1. Tambah Fasilitas" << endl;
         cout << "2. Lihat Fasilitas" << endl;
         cout << "3. Hapus Fasilitas" << endl;
         cout << "0. Kembali" << endl;
+        cout << "Masukan kode menu : ";
         cin >> inputUser;
     }
 }
 
 void addFacility(listFacility &LF, listMember &LM){
     int inputUser;
-    cout << "----- Tambah Fasilitas -----" << endl;
     infotypeFacility fasilitas;
+
+    spacyMotorHonda("Tambah Fasilitas");
+
     cout << "Nama Fasilitas/Layanan : ";
     cin >> fasilitas.name;
     cout << "Nama Instruktur : ";
@@ -89,7 +100,9 @@ void addFacility(listFacility &LF, listMember &LM){
     fasilitas.membersCount = 0;
     cout << "1. Tambah Fasilitas Diawal" << endl;
     cout << "2. Tambah Fasilitas Diakhir" << endl;
+    cout << "Masukan kode menu : ";
     cin >> inputUser;
+
     if (inputUser == 1) {
         insertFacilityFirst(LF, createElmFacility(fasilitas));
     } else if (inputUser == 2) {
@@ -110,6 +123,7 @@ void insertFacilityFirst(listFacility &LF, adrFacility adr) {
 
 void insertFacilityLast(listFacility &LF, adrFacility adr) {
     adrFacility q;
+
     q = first(LF);
     if (first(LF) == nil) {
         first(LF) = adr;
@@ -123,20 +137,27 @@ void insertFacilityLast(listFacility &LF, adrFacility adr) {
 
 void showAllFacilityData(listFacility LF, listMember LM) {
     adrFacility adr = first(LF);
+
     if (first(LF) == nil) {
         cout << "List Masih Kosong" << endl;
     } else {
+        spacyMotorHonda("List Data Facility");
+        cout << endl;
         while (adr != nil) {
             cout << "Nama : " << info(adr).name << endl;
             cout << "Instruktur : " << info(adr).instructor << endl;
+            cout << "Fasilitas digunakan sebanyak : " << info(adr).membersCount << endl;
             cout << endl;
             adr = nextFac(adr);
         }
+        cout << "-----------------------------" << endl;
+        cout << endl;
     }
 }
 
 adrFacility searchFacility(listFacility LF, string name) {
     adrFacility adr = first(LF);
+
     while (adr != nil) {
         if (info(adr).name == name) {
             return adr;
@@ -148,6 +169,7 @@ adrFacility searchFacility(listFacility LF, string name) {
 
 adrFacility deleteFacility(listFacility &LF, string name){
     adrFacility adrDel = searchFacility(LF, name);
+
     if (adrDel == nil){
         cout << "Fasilitas tidak ditemukan" << endl;
     } else {
@@ -185,6 +207,7 @@ adrFacility deleteFacility(listFacility &LF, string name){
 
 void deleteFacilityByname(listFacility &LF) {
     string name;
+
     cout << "Nama fasilitas yang akan dihapus : ";
     cin >> name;
     adrFacility adrDel = deleteFacility(LF, name);
@@ -195,13 +218,17 @@ void deleteFacilityByname(listFacility &LF) {
 
 void memberMenu(listFacility &LF, listMember &LM) {
     int inputUser;
-    cout << "----- Menu Member -----" << endl;
+
+    spacyMotorHonda("Menu Member");
+
     cout << "1. Tambah Member" << endl;
     cout << "2. Lihat Member" << endl;
     cout << "3. Hapus Member" << endl;
     cout << "4. Pilih Fasilitas" << endl;
     cout << "0. Kembali" << endl;
+    cout << "Masukan kode menu : ";
     cin >> inputUser;
+
     while (inputUser != 0) {
         if (inputUser == 1) {
             addMember(LM);
@@ -212,12 +239,15 @@ void memberMenu(listFacility &LF, listMember &LM) {
         } else if (inputUser == 4) {
             chooseFacility(LF, LM);
         }
-        cout << "----- Menu Member -----" << endl;
+
+        spacyMotorHonda("Menu Member");
+
         cout << "1. Tambah Member" << endl;
         cout << "2. Lihat Member" << endl;
         cout << "3. Hapus Member" << endl;
         cout << "4. Pilih Fasilitas" << endl;
         cout << "0. Kembali" << endl;
+        cout << "Masukan kode menu : ";
         cin >> inputUser;
     }
 }
@@ -225,7 +255,9 @@ void memberMenu(listFacility &LF, listMember &LM) {
 void addMember(listMember &LM) {
     infotypeMember member;
     int inputUser;
-    cout << "----- Tambah Member -----" << endl;
+
+    spacyMotorHonda("Tambah Member");
+
     cout << "Nama Member : ";
     cin >> member.name;
     cout << "Nomor Telepon : ";
@@ -234,7 +266,9 @@ void addMember(listMember &LM) {
     cin >> member.age;
     cout << "1. Tambah Member Diawal" << endl;
     cout << "2. Tambah Member Diakhir" << endl;
+    cout << "Masukan kode menu : ";
     cin >> inputUser;
+
     if (inputUser == 1) {
         insertMemberFirst(LM, createElmMember(member));
     } else if (inputUser == 2) {
@@ -268,22 +302,28 @@ void insertMemberLast(listMember &LM, adrMember adr) {
 
 void showAllMemberData(listMember LM) {
     adrMember adr = first(LM);
+
     if (first(LM) == nil) {
         cout << "List Masih Kosong" << endl;
     } else {
+        spacyMotorHonda("Data Member");
+        cout << endl;
         while (adr != nil) {
             cout << endl;
             cout << "Nama : " << info(adr).name << endl;
             cout << "Nomor Telepon : " << info(adr).phoneNumber << endl;
             cout << "Umur : " << info(adr).age << endl;
+            cout << endl;
             adr = nextMem(adr);
         }
+        cout << "-----------------------------" << endl;
+        cout << endl;
     }
-    cout << endl;
 }
 
 adrMember searchMember(listMember LM, string name) {
     adrMember adr = first(LM);
+
     while (adr != nil) {
         if (info(adr).name == name) {
             return adr;
@@ -295,6 +335,7 @@ adrMember searchMember(listMember LM, string name) {
 
 adrMember deleteMember(listFacility &LF, listMember &LM, string name) {
     adrMember adrDel = searchMember(LM, name);
+
     if (adrDel == nil) {
         cout << "Member tidak ditemukan" << endl;
     } else {
@@ -363,6 +404,7 @@ void deleteMemberByname(listFacility &LF, listMember &LM){
 
 void searchRelation(listFacility LF, listMember LM, adrFacility &srcFac, adrMember adrDel, adrRelation &srcRel){
     bool found = false;
+
     while (srcFac != nil && !found) {
         srcRel = firstRelation(srcFac);
         while (srcRel !=nil && !found) {
@@ -380,6 +422,7 @@ void searchRelation(listFacility LF, listMember LM, adrFacility &srcFac, adrMemb
 
 void connectFacility(listFacility &LF, listMember &LM, adrFacility adrFac, adrMember adrMem){
     adrRelation newRel = createElmRelation();
+
     pointerMember(newRel) = adrMem;
     nextRel(newRel) = nil;
     if (firstRelation(adrFac) == nil){
@@ -428,14 +471,18 @@ void showAllData(listFacility LF, listMember LM) {
     if (facilityAdr == nil) {
         cout << "List Masih Kosong" << endl;
     } else {
+        spacyMotorHonda("Menampilkan seluruh data parent beserta childnya");
+        cout << endl;
         while (facilityAdr != nil) {
             cout << "Nama : " << info(facilityAdr).name << endl;
             cout << "Instruktur : " << info(facilityAdr).instructor << endl;
             if (firstRelation(facilityAdr) == nil) {
                 cout << "Fasilitas ini belum digunakan siapa pun" << endl;
+                cout << "-----------------------------" << endl;
             } else {
                 cout << "Pengguna Fasilitas : " << endl;
                 cout << "Fasilitas digunakan sebanyak : " << info(facilityAdr).membersCount << endl;
+                spacyMotorHonda("😋😋😋😋😋😋😋😋😋😋😋😋😋😋😋😋😋");
                 subListRelation(firstRelation(facilityAdr));
             }
             facilityAdr = nextFac(facilityAdr);
@@ -448,6 +495,11 @@ void subListRelation(adrRelation relation) {
         cout << "Nama : " << info(pointerMember(relation)).name << endl;
         cout << "No. Telepon : " << info(pointerMember(relation)).phoneNumber << endl;
         cout << "Umur : " << info(pointerMember(relation)).age << endl;
+        cout << "-----------------------------" << endl;
         relation = nextRel(relation);
     }
+}
+
+void spacyMotorHonda(string judul) {
+    cout << "--------- " << judul << " ---------" << endl;
 }

@@ -155,4 +155,7 @@ void deleteMemberByname(listFacility &LF, listMember &LM);
 // Centralize of connecting relation
 void chooseFacility(listFacility &LF, listMember &LM);
 
+// Give space after choosing menu
+void spacyMotorHonda(string judul);
+
 #endif /* gym_hpp */
