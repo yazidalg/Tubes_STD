@@ -228,7 +228,7 @@ void addMember(listMember &LM) {
     cout << "----- Tambah Member -----" << endl;
     cout << "Nama Member : ";
     cin >> member.name;
-    cout << "Nomor Telefon : ";
+    cout << "Nomor Telepon : ";
     cin >> member.phoneNumber;
     cout << "Umur : ";
     cin >> member.age;
@@ -394,6 +394,13 @@ void connectFacility(listFacility &LF, listMember &LM, adrFacility adrFac, adrMe
 }
 
 void chooseFacility(listFacility &LF, listMember &LM){
+    if (first(LF) == nil && first(LM) == nil){
+        if (first(LF) == nil){
+            cout << "fasilitas kosong, kamu belum bisa memilih menu ini" << endl;
+        }else if (first(LM) == nil){
+            cout << "fasilitas kosong, kamu belum bisa memilih menu ini" << endl;
+        }
+    }
     string name;
     cout << "Nama member: ";
     cin >> name;
@@ -419,7 +426,7 @@ void showAllData(listFacility LF, listMember LM) {
     adrFacility facilityAdr = first(LF);
 
     if (facilityAdr == nil) {
-        cout << "Kosong" << endl;
+        cout << "List Masih Kosong" << endl;
     } else {
         while (facilityAdr != nil) {
             cout << "Nama : " << info(facilityAdr).name << endl;
@@ -439,6 +446,7 @@ void showAllData(listFacility LF, listMember LM) {
 void subListRelation(adrRelation relation) {
     while (relation != nil) {
         cout << "Nama : " << info(pointerMember(relation)).name << endl;
+        cout << "No. Telepon : " << info(pointerMember(relation)).phoneNumber << endl;
         cout << "Umur : " << info(pointerMember(relation)).age << endl;
         relation = nextRel(relation);
     }
