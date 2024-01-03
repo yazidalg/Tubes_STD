@@ -3,7 +3,7 @@ This is our final project for data structures subject
 
 # Disclaimer
 If you cannot run this project on your computer.
-You can follow the ```bash tasks.json``` file.
+You can follow the ```tasks.json``` file.
 
 ```javascript
 {
