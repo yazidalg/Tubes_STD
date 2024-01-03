@@ -12,6 +12,7 @@ int mainMenu(){
     cout << "----- Gym Ciganitry -----" << endl;
     cout << "1. Data Fasilitas" << endl;
     cout << "2. Data Member" << endl;
+    cout << "3. Lihat Fasilitas Beserta Member" << endl;
     cout << "0. Keluar" << endl;
     cin >> inputUser;
     return inputUser;
@@ -209,7 +210,7 @@ void memberMenu(listFacility &LF, listMember &LM) {
         } else if (inputUser == 3) {
             deleteMemberByname(LF, LM);
         } else if (inputUser == 4) {
-            
+            chooseFacility(LF, LM);
         }
         cout << "----- Menu Member -----" << endl;
         cout << "1. Tambah Member" << endl;
@@ -388,4 +389,25 @@ void connectFacility(listFacility &LF, listMember &LM, adrFacility adrFac, adrMe
         }
         nextRel(Q) = newRel;
     }
+}
+
+void chooseFacility(listFacility &LF, listMember &LM){
+    string name;
+    cout << "Nama member: ";
+    cin >> name;
+    adrMember memberMemilih = searchMember(LM, name);
+    while (memberMemilih == nil){
+        cout << "Member tidak ditemukan, silahkan tulis nama member yang valid: ";
+        cin >> name;
+        memberMemilih = searchMember(LM, name);
+    }
+    cout << "Fasilitas yang dipilih: ";
+    cin >> name;
+    adrFacility fasilitasTerpilih = searchFacility(LF, name);
+    while (fasilitasTerpilih == nil){
+        cout << "Fasilitas tidak ditemukan, silahkan tulis nama fasilitas yang tersedia: ";
+        cin >> name;
+        fasilitasTerpilih = searchFacility(LF, name);
+    }
+    connectFacility(LF, LM, fasilitasTerpilih, memberMemilih);
 }

@@ -145,7 +145,10 @@ adrMember deleteMember(listFacility &LF, listMember &LM, string name);
 // Connect Facility to Member
 void connectFacility(listFacility &LF, listMember &LM, adrMember adrMem);
 
-// Centralize Of Function Search Facility And DeleteFacility
+// Centralize of Function Search Facility And DeleteFacility
 void deleteMemberByname(listFacility &LF, listMember &LM);
+
+// Centralize of connecting relation
+void chooseFacility(listFacility &LF, listMember &LM);
 
 #endif /* gym_hpp */
