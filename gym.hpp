@@ -104,10 +104,13 @@ void memberMenu(listMember LM);
 void invalidMenu(int invalid);
 
 // Add Member
-void addMember(listMember LM);
+void addMember(listMember &LM);
 
-// Insert Member
-void insertMember(listMember &LM, adrMember adr);
+// Insert First Index Member Logic Only
+void insertMemberFirst(listMember &LM, adrMember adr);
+
+// Insert Last Index Member Logic Only
+void insertMemberLast(listMember &LM, adrMember adr);
 
 // Centralize Of Function Search Facility And DeleteFacility
 void deleteFacilityByname(listFacility &LF);

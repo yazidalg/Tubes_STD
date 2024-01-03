@@ -17,6 +17,10 @@ int mainMenu(){
     return inputUser;
 }
 
+void invalidMenu(int invalid) {
+    cout << "Menu dengan pilihan " << invalid << " tidak tersedia" << endl;
+}
+
 void initList(listFacility &LF, listMember &LM){
     first(LF) = NULL;
     first(LM) = NULL;
@@ -116,82 +120,6 @@ void insertFacilityLast(listFacility &LF, adrFacility adr) {
     }
 }
 
-void memberMenu(listMember LM) {
-    int inputUser;
-    cout << "----- Menu Member -----" << endl;
-    cout << "1. Tambah Member" << endl;
-    cout << "2. Lihat Member" << endl;
-    cout << "3. Hapus Member" << endl;
-    cout << "0. Kembali" << endl;
-    cin >> inputUser;
-    while (inputUser != 0) {
-        if (inputUser == 1) {
-            addMember(LM);
-        } else if (inputUser == 2) {
-            showAllMemberData(LM);
-        } else if (inputUser == 3) {
-            cout << "hapus aja lah" << endl;
-        }
-        cin >> inputUser;
-    }
-}
-
-void invalidMenu(int invalid) {
-    cout << "Menu dengan pilihan " << invalid << " tidak tersedia" << endl;
-}
-
-void addMember(listMember LM) {
-    infotypeMember member;
-    cout << "Nama Member : ";
-    cin >> member.name;
-    cout << "Nomor Telefon : ";
-    cin >> member.phoneNumber;
-    cout << "Umur : ";
-    cin >> member.age;
-    insertMember(LM, createElmMember(member));
-    memberMenu(LM);
-}
-
-void insertMember(listMember &LM, adrMember adr) {
-    if (first(LM) == nil) {
-        first(LM) = adr;
-        last(LM) = adr;
-    } else {
-        nextMem(adr) = first(LM);
-        prevMem(first(LM)) = adr;
-        first(LM) = adr;
-    }
-}
-
-void showAllMemberData(listMember LM) {
-    adrMember adr = first(LM);
-    if (first(LM) == nil) {
-        cout << "List Masih Kosong" << endl;
-    } else {
-        while (adr != nil) {
-            cout << endl;
-            cout << "Nama : " << info(adr).name << endl;
-            cout << "Nomor Telepon : " << info(adr).phoneNumber << endl;
-            cout << "Umur : " << info(adr).age << endl;
-            adr = nextMem(adr);
-        }
-    }
-    memberMenu(LM);
-    cout << endl;
-}
-
-adrMember searchMember(listMember LM, string name) {
-    adrMember found = first(LM);
-    adrMember adr = first(LM);
-    while (adr != nil) {
-        if (info(adr).name == name) {
-            found = adr;
-        }
-        adr = nextMem(adr);
-    }
-    return found;
-}
-
 void showAllFacilityData(listFacility LF, listMember LM) {
     adrFacility adr = first(LF);
     if (first(LF) == nil) {
@@ -264,3 +192,100 @@ void deleteFacilityByname(listFacility &LF) {
         cout << "Fasilitas dengan nama " << info(adrDel).name << " dihapus" << endl;
     }
 }
+
+void memberMenu(listMember LM) {
+    int inputUser;
+    cout << "----- Menu Member -----" << endl;
+    cout << "1. Tambah Member" << endl;
+    cout << "2. Lihat Member" << endl;
+    cout << "3. Hapus Member" << endl;
+    cout << "0. Kembali" << endl;
+    cin >> inputUser;
+    while (inputUser != 0) {
+        if (inputUser == 1) {
+            addMember(LM);
+        } else if (inputUser == 2) {
+            showAllMemberData(LM);
+        } else if (inputUser == 3) {
+            cout << "hapus aja lah" << endl;
+        }
+        cout << "----- Menu Member -----" << endl;
+        cout << "1. Tambah Member" << endl;
+        cout << "2. Lihat Member" << endl;
+        cout << "3. Hapus Member" << endl;
+        cout << "0. Kembali" << endl;
+        cin >> inputUser;
+    }
+}
+
+void addMember(listMember &LM) {
+    infotypeMember member;
+    int inputUser;
+    cout << "----- Tambah Member -----" << endl;
+    cout << "Nama Member : ";
+    cin >> member.name;
+    cout << "Nomor Telefon : ";
+    cin >> member.phoneNumber;
+    cout << "Umur : ";
+    cin >> member.age;
+    cout << "1. Tambah Member Diawal" << endl;
+    cout << "2. Tambah Member Diakhir" << endl;
+    cin >> inputUser;
+    if (inputUser == 1) {
+        insertMemberFirst(LM, createElmMember(member));
+    } else if (inputUser == 2) {
+        insertMemberLast(LM, createElmMember(member));
+    } else {
+        invalidMenu(inputUser);
+    }
+}
+
+void insertMemberFirst(listMember &LM, adrMember adr) {
+    if (first(LM) == nil) {
+        first(LM) = adr;
+        last(LM) = adr;
+    } else {
+        nextMem(adr) = first(LM);
+        prevMem(first(LM)) = adr;
+        first(LM) = adr;
+    }
+}
+
+void insertMemberLast(listMember &LM, adrMember adr) {
+    if (first(LM) == nil) {
+        first(LM) = adr;
+        last(LM) = adr;
+    } else {
+        nextMem(last(LM)) = adr;
+        prevMem(adr) = last(LM);
+        last(LM) = adr;
+    }
+}
+
+void showAllMemberData(listMember LM) {
+    adrMember adr = first(LM);
+    if (first(LM) == nil) {
+        cout << "List Masih Kosong" << endl;
+    } else {
+        while (adr != nil) {
+            cout << endl;
+            cout << "Nama : " << info(adr).name << endl;
+            cout << "Nomor Telepon : " << info(adr).phoneNumber << endl;
+            cout << "Umur : " << info(adr).age << endl;
+            adr = nextMem(adr);
+        }
+    }
+    cout << endl;
+}
+
+adrMember searchMember(listMember LM, string name) {
+    adrMember adr = first(LM);
+    while (adr != nil) {
+        if (info(adr).name == name) {
+            return adr;
+        }
+        adr = nextMem(adr);
+    }
+    return adr;
+}
+
