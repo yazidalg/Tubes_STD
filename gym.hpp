@@ -109,6 +109,9 @@ void addMember(listMember LM);
 // Insert Member
 void insertMember(listMember &LM, adrMember adr);
 
+// Centralize Of Function Search Facility And DeleteFacility
+void deleteFacilityByname(listFacility &LF);
+
 // Show All Data Member
 void showAllMemberData(listMember LM);
 
@@ -117,5 +120,11 @@ void showAllFacilityData(listFacility LF, listMember LM);
 
 // Search Member
 adrMember searchMember(listMember LM, string name);
+
+// Search Facility By Name
+adrFacility searchFacility(listFacility LF, string name);
+
+// Delete Facility with the relation included
+adrFacility deleteFacility(listFacility &LF, string name);
 
 #endif /* gym_hpp */

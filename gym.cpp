@@ -26,23 +26,23 @@ void initList(listFacility &LF, listMember &LM){
 adrFacility createElmFacility(infotypeFacility x){
     adrFacility P = new elmFacility;
     info(P) = x;
-    nextFac(P) = NULL;
-    firstRelation(P) = NULL;
+    nextFac(P) = nil;
+    firstRelation(P) = nil;
     return P;
 }
 
 adrMember createElmMember(infotypeMember x){
     adrMember P = new elmMember;
     info(P) = x;
-    nextMem(P) = NULL;
-    prevMem(P) = NULL;
+    nextMem(P) = nil;
+    prevMem(P) = nil;
     return P;
 }
 
 adrRelation createElmRelation(){
     adrRelation P = new elmRelation;
-    pointerMember(P) = NULL;
-    nextRel(P) = NULL;
+    pointerMember(P) = nil;
+    nextRel(P) = nil;
     return P;
 }
 
@@ -60,8 +60,8 @@ void facilityMenu(listFacility &LF, listMember &LM) {
         } else if (inputUser == 2) {
             showAllFacilityData(LF, LM);
         } else if (inputUser == 3) {
-            cout << "hapus aja lah" << endl;
-        }else{
+            deleteFacilityByname(LF);
+        } else {
             invalidMenu(inputUser);
         }
         cout << "----- Menu Fasilitas -----" << endl;
@@ -82,9 +82,8 @@ void addFacility(listFacility &LF, listMember &LM){
     cout << "Nama Instruktur : ";
     cin >> fasilitas.instructor;
     fasilitas.membersCount = 0;
-    cout << "1. Tambah Fasilitas Depan" << endl;
-    cout << "2. Tambah Fasilitas Belakang" << endl;
-    cout << "0. Kembali" << endl;
+    cout << "1. Tambah Fasilitas Diawal" << endl;
+    cout << "2. Tambah Fasilitas Diakhir" << endl;
     cin >> inputUser;
     if (inputUser == 1) {
         insertFacilityFirst(LF, createElmFacility(fasilitas));
@@ -92,7 +91,6 @@ void addFacility(listFacility &LF, listMember &LM){
         insertFacilityLast(LF, createElmFacility(fasilitas));
     } else {
         invalidMenu(inputUser);
-        cin >> inputUser;
     }
 }
 
@@ -139,7 +137,6 @@ void memberMenu(listMember LM) {
 }
 
 void invalidMenu(int invalid) {
-    cout << endl;
     cout << "Menu dengan pilihan " << invalid << " tidak tersedia" << endl;
 }
 
@@ -190,7 +187,7 @@ adrMember searchMember(listMember LM, string name) {
         if (info(adr).name == name) {
             found = adr;
         }
-        adr = next(adr);
+        adr = nextMem(adr);
     }
     return found;
 }
@@ -201,11 +198,69 @@ void showAllFacilityData(listFacility LF, listMember LM) {
         cout << "List Masih Kosong" << endl;
     } else {
         while (adr != nil) {
-            cout << endl;
             cout << "Nama : " << info(adr).name << endl;
             cout << "Instruktur : " << info(adr).instructor << endl;
+            cout << endl;
             adr = nextFac(adr);
         }
     }
-    cout << endl;
-} 
+}
+
+adrFacility searchFacility(listFacility LF, string name) {
+    adrFacility adr = first(LF);
+    while (adr != nil) {
+        if (info(adr).name == name) {
+            return adr;
+        }
+        adr = nextFac(adr);
+    }
+    return adr;
+}
+
+adrFacility deleteFacility(listFacility &LF, string name){
+    adrFacility adrDel = searchFacility(LF, name);
+    cout << info(adrDel).name << endl;
+    if (adrDel == nil){
+        cout << "Fasilitas tidak ditemukan" << endl;
+    } else {
+        // First condition is used for delete first
+        if (adrDel == first(LF)) {
+            first(LF) = nextFac(adrDel);
+            nextFac(adrDel) = nil;
+        // Second condition is used for delete last
+        } else if (nextFac(adrDel) == nil) { 
+            adrFacility Q = first(LF);
+            while (nextFac(Q) != adrDel) {
+                Q = nextFac(Q);
+            }
+            nextFac(Q) = nil;
+        // Third condition is used for delete after
+        } else {
+            adrFacility Q = first(LF);
+            while (nextFac(Q) != adrDel) {
+                Q = nextFac(Q);
+            }
+            nextFac(Q) = nextFac(adrDel);
+            nextFac(adrDel) = nil;
+        }
+        // New condition here, for delete all relation to member
+        if (firstRelation(adrDel) != nil){
+            adrRelation adrRel = firstRelation(adrDel);
+            while (adrRel != nil){
+                pointerMember(adrRel) = nil;
+                adrRel = nextRel(adrRel);
+            }
+        }
+    }
+    return adrDel;
+}
+
+void deleteFacilityByname(listFacility &LF) {
+    string name;
+    cout << "Nama fasilitas yang akan dihapus : ";
+    cin >> name;
+    adrFacility adrDel = deleteFacility(LF, name);
+    if (adrDel != nil){
+        cout << "Fasilitas dengan nama " << info(adrDel).name << " dihapus" << endl;
+    }
+}
