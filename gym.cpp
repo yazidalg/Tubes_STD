@@ -443,26 +443,27 @@ void chooseFacility(listFacility &LF, listMember &LM){
         }else if (first(LM) == nil){
             cout << "fasilitas kosong, kamu belum bisa memilih menu ini" << endl;
         }
-    }
-    string name;
-    cout << "Nama member: ";
-    cin >> name;
-    adrMember memberMemilih = searchMember(LM, name);
-    while (memberMemilih == nil){
-        cout << "Member tidak ditemukan, silahkan tulis nama member yang valid: ";
+    }else{
+        string name;
+        cout << "Nama member: ";
         cin >> name;
-        memberMemilih = searchMember(LM, name);
-    }
-    cout << "Fasilitas yang dipilih: ";
-    cin >> name;
-    adrFacility fasilitasTerpilih = searchFacility(LF, name);
-    while (fasilitasTerpilih == nil){
-        cout << "Fasilitas tidak ditemukan, silahkan tulis nama fasilitas yang tersedia: ";
+        adrMember memberMemilih = searchMember(LM, name);
+        while (memberMemilih == nil){
+            cout << "Member tidak ditemukan, silahkan tulis nama member yang valid: ";
+            cin >> name;
+            memberMemilih = searchMember(LM, name);
+        }
+        cout << "Fasilitas yang dipilih: ";
         cin >> name;
-        fasilitasTerpilih = searchFacility(LF, name);
+        adrFacility fasilitasTerpilih = searchFacility(LF, name);
+        while (fasilitasTerpilih == nil){
+            cout << "Fasilitas tidak ditemukan, silahkan tulis nama fasilitas yang tersedia: ";
+            cin >> name;
+            fasilitasTerpilih = searchFacility(LF, name);
+        }
+        connectFacility(LF, LM, fasilitasTerpilih, memberMemilih);
+        info(fasilitasTerpilih).membersCount++;
     }
-    connectFacility(LF, LM, fasilitasTerpilih, memberMemilih);
-    info(fasilitasTerpilih).membersCount++;
 }
 
 void showAllData(listFacility LF, listMember LM) {
