@@ -439,9 +439,9 @@ void connectFacility(listFacility &LF, listMember &LM, adrFacility adrFac, adrMe
 void chooseFacility(listFacility &LF, listMember &LM){
     if (first(LF) == nil && first(LM) == nil){
         if (first(LF) == nil){
-            cout << "fasilitas kosong, kamu belum bisa memilih menu ini" << endl;
+            cout << "Fasilitas kosong, kamu belum bisa memilih menu ini" << endl;
         }else if (first(LM) == nil){
-            cout << "fasilitas kosong, kamu belum bisa memilih menu ini" << endl;
+            cout << "Member kosong, kamu belum bisa memilih menu ini" << endl;
         }
     }else{
         string name;
